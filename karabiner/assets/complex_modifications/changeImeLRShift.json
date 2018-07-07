@@ -1,0 +1,54 @@
+{
+  "title": "Change IME　LRShift",
+  "rules": [
+    {
+      "description": "Change IME　LRShift",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "left_shift",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "_comment": "english",
+              "key_code": "lang2"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "right_shift",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "right_shift"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "_comment": "japanese",
+              "key_code": "lang1"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
