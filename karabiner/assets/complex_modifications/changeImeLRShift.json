@@ -20,7 +20,6 @@
           ],
           "to_if_alone": [
             {
-              "_comment": "english",
               "key_code": "lang2"
             }
           ],
@@ -42,7 +41,6 @@
           ],
           "to_if_alone": [
             {
-              "_comment": "japanese",
               "key_code": "lang1"
             }
           ],
