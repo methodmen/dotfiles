@@ -58,6 +58,13 @@ def configure(keymap):
         def ime_off():
             switch_ime(False)
 
+        # For vim
+        def escWithIMEOff():
+            esc = keymap.InputKeyCommand("Esc")
+            esc()
+            ime_off()
+            # ime_off = keymap.InputKeyCommand("Ctrl-Shift-Semicolon")  # GoogleIMEのショートカット
+
         # Get global keymap instance
         keymap_global = keymap.defineWindowKeymap()
 
@@ -134,7 +141,7 @@ def configure(keymap):
         keymap_global["U1-i"] = "Alt-Right"  # Move cursor word right
 
         # esc
-        keymap_global["U1-Quote"] = "esc"
+        keymap_global["U1-Quote"] = escWithIMEOff
 
         # vim D dd dw db yy p
         keymap_global["U1-S-D"] = "S-End", "C-X"  # D カーソルから行末まで削除
