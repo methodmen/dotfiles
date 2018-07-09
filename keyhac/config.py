@@ -34,50 +34,36 @@ def configure(keymap):
 
     # --------------------------------------------------------------------
 
-    # Simple key replacement
-    keymap.replaceKey("RAlt", 235)
-
-    # User modifier key definition
-    keymap.defineModifier(235, "User0")
-
     # --------------------------------------------------------------------
-
     # My keymap
     if 1:
-        # Change IME method
-        def switch_ime(isImeOn):
-            if isImeOn:
-                ime_status = 1
-            else:
-                ime_status = 0
-            keymap.wnd.setImeStatus(ime_status)
+        enableChangeAltWin = True
+        enableChangeFirstStageKeys = True
+        enableSpaceFN = True
 
-        def ime_on():
-            switch_ime(True)
+        def imeOn():
+            keymap.wnd.setImeStatus(1)
 
-        def ime_off():
-            switch_ime(False)
+        def imeOff():
+            keymap.wnd.setImeStatus(0)
 
-        # For vim
         def escWithIMEOff():
             esc = keymap.InputKeyCommand("Esc")
             esc()
-            ime_off()
-            # ime_off = keymap.InputKeyCommand("Ctrl-Shift-Semicolon")  # GoogleIMEのショートカット
+            imeOff()  # For vim
 
         # Get global keymap instance
         keymap_global = keymap.defineWindowKeymap()
 
         # One shot modifire
-        # keymap_global["O-LCtrl"] = "Esc"
-        keymap_global["O-LShift"] = ime_off
-        keymap_global["O-RShift"] = ime_on
+        keymap_global["O-LShift"] = imeOff
+        keymap_global["O-RShift"] = imeOn
 
         # close current window
         keymap_global["W-q"] = "A-F4"
 
         # change alt <-> win
-        if 1:
+        if enableChangeAltWin:
             keymap.replaceKey("RAlt", "RWin")
             keymap.replaceKey("RWin", "RAlt")
             keymap.replaceKey("LAlt", "LWin")
@@ -88,86 +74,128 @@ def configure(keymap):
             keymap_global["Alt-Q"] = "A-F4"
             keymap_global["Alt-D"] = "Win-D"
 
-        # ----------------spaceFn:
-        # Define spaceFn modefire
-        keymap.replaceKey("Space", 200)
+        # change first stage keys for hhkb
+        if enableChangeFirstStageKeys:
+            keymap.replaceKey("BackQuote", "Back")
+            keymap.replaceKey("Back", "BackSlash")
+            keymap.replaceKey("BackSlash", "ESC")
+            keymap.replaceKey("ESC", "BackQuote")
 
-        # for js keybord setting
-        keymap.replaceKey(255, 200)  # 変換 to spaceFn modefire
-        keymap.replaceKey(235, 200)  # 無変換 to spaceFn modefire
-        keymap.replaceKey(193, "RShift")  # ろ to Right Shift
+        # -----------------------------------------------
+        # SpaceFn
 
-        keymap.defineModifier(200, "User1")
-        keymap_global["O-200"] = "Space"
+        if enableSpaceFN:
+            # define spaceFn modefire
+            keymap.replaceKey("Space", 200)
+            keymap.defineModifier(200, "User1")
+            keymap_global["O-200"] = "Space"  # one shot modefire space
 
-        for k in ("", "S-", "C-", "C-S-", "A-", "A-S-", "A-C-", "A-C-S-", "W-",
-                  "W-S-", "W-C-", "W-C-S-", "W-A-", "W-A-S-", "W-A-C-",
-                  "W-A-C-S-", "RA-RC-", "RS-"):
-            keymap_global[k + "U1-h"] = k + "Left"  # Move cursor left
-            keymap_global[k + "U1-j"] = k + "Down"  # Move cursor down
-            keymap_global[k + "U1-k"] = k + "Up"  # Move cursor up
-            keymap_global[k + "U1-l"] = k + "Right"  # Move cursor right
-            keymap_global[k + "U1-a"] = k + "Home"  # Move to beginning of line
-            keymap_global[k + "U1-e"] = k + "End"  # Move to end of line
-            keymap_global[k +
-                          "U1-S-6"] = k + "Home"  # Move to beginning of line
-            keymap_global[k + "U1-S-4"] = k + "End"  # Move to end of line
-            keymap_global[k + "U1-Comma"] = k + "PageUp"  # Page up
-            keymap_global[k + "U1-m"] = k + "PageDown"  # Page down
-            keymap_global[k + "U1-x"] = k + "Delete"  # Delete
-            keymap_global[k + "U1-n"] = k + "Back"  # Back space
-            keymap_global[k + "U1-Semicolon"] = k + "Enter"  # Enter
-            # set F1~F12
-            for i in range(13):
-                if i == 0:
-                    keymap_global[k + "U1-0"] = k + "F10"
-                elif i == 11:
-                    keymap_global[k + "U1-Minus"] = k + "F11"
-                elif i == 12:
-                    keymap_global[k + "U1-Plus"] = k + "F12"
-                else:
-                    keymap_global[k + "U1-" + str(i)] = k + "F" + str(i)
+            # for js keybord setting
+            keymap.replaceKey(255, 200)  # 変換 to spaceFn modefire
+            keymap.replaceKey(235, 200)  # 無変換 to spaceFn modefire
+            keymap.replaceKey(193, "RShift")  # ろ to Right Shift
 
-        keymap_global["U1-w"] = "C-Right"  # Move cursor word right
-        keymap_global[
-            "U1-S-w"] = "C-S-Right"  # Move and select cursor word right
-        keymap_global["U1-b"] = "C-Left"  # Move cursor word left
-        keymap_global[
-            "U1-S-b"] = "C-S-Left"  # Move and select cursor word left
-        # keymap_global[ "U1-c" ]         = "C-Left","C-S-Right"      # select current word
+            # move and function keys
+            for k in ("", "S-", "C-", "C-S-", "A-", "A-S-", "A-C-", "A-C-S-",
+                      "W-", "W-S-", "W-C-", "W-C-S-", "W-A-", "W-A-S-",
+                      "W-A-C-", "W-A-C-S-", "RA-RC-", "RS-"):
+                keymap_global[k + "U1-h"] = k + "Left"  # Move cursor left
+                keymap_global[k + "U1-j"] = k + "Down"  # Move cursor down
+                keymap_global[k + "U1-k"] = k + "Up"  # Move cursor up
+                keymap_global[k + "U1-l"] = k + "Right"  # Move cursor right
+                keymap_global[k +
+                              "U1-a"] = k + "Home"  # Move to beginning of line
+                keymap_global[k + "U1-e"] = k + "End"  # Move to end of line
+                keymap_global[
+                    k + "U1-S-6"] = k + "Home"  # Move to beginning of line
+                keymap_global[k + "U1-S-4"] = k + "End"  # Move to end of line
+                keymap_global[k + "U1-Comma"] = k + "PageUp"  # Page up
+                keymap_global[k + "U1-m"] = k + "PageDown"  # Page down
+                keymap_global[k + "U1-x"] = k + "Delete"  # Delete
+                keymap_global[k + "U1-n"] = k + "Back"  # Back space
+                keymap_global[k + "U1-Semicolon"] = k + "Enter"  # Enter
 
-        # next/back
-        keymap_global["U1-o"] = "Alt-Left"  # Move cursor word right
-        keymap_global["U1-i"] = "Alt-Right"  # Move cursor word right
+                for i in range(13):  # set F1~F12
+                    if i == 0:
+                        keymap_global[k + "U1-0"] = k + "F10"
+                    elif i == 11:
+                        keymap_global[k + "U1-Minus"] = k + "F11"
+                    elif i == 12:
+                        keymap_global[k + "U1-Plus"] = k + "F12"
+                    else:
+                        keymap_global[k + "U1-" + str(i)] = k + "F" + str(i)
 
-        # esc
-        keymap_global["U1-Quote"] = escWithIMEOff
+            # move word
+            keymap_global["U1-w"] = "C-Right"  # Move cursor word right
+            keymap_global[
+                "U1-S-w"] = "C-S-Right"  # Move and select cursor word right
+            keymap_global["U1-b"] = "C-Left"  # Move cursor word left
+            keymap_global[
+                "U1-S-b"] = "C-S-Left"  # Move and select cursor word left
+            keymap_global[
+                "U1-c"] = "C-Left", "C-S-Right"  # Select current word
 
-        # vim D dd dw db yy p
-        keymap_global["U1-S-D"] = "S-End", "C-X"  # D カーソルから行末まで削除
-        keymap_global["U1-D"] = keymap.defineMultiStrokeKeymap("U1-D")
-        keymap_global["U1-D"][
-            "U1-D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
-        keymap_global["U1-D"]["U1-W"] = "C-S-Right", "C-X"  # dw 右単語切取
-        keymap_global["U1-D"]["U1-B"] = "C-S-Left", "C-X"  # db 左単語切取
-        keymap_global["U1-G"] = keymap.defineMultiStrokeKeymap("U1-G")
-        keymap_global["U1-G"]["U1-G"] = "C-Home"  # gg ファイル先頭へ移動
-        keymap_global["U1-S-G"] = "C-End"  # G ファイル末尾へ移動
-        keymap_global["U1-c"] = keymap.defineMultiStrokeKeymap("U1-c")
-        keymap_global["U1-c"]["U1-w"] = "C-S-Right", "Back"  # cw 右単語削除
-        # keymap_global["U1-Y"] = keymap.defineMultiStrokeKeymap("U1-Y")
-        # keymap_global["U1-Y"]["U1-Y"]  = "Home", "S-End", "C-C", "Home" # yy 1行コピー
-        keymap_global["U1-Y"] = "C-C"  # y コピー
-        keymap_global["U1-p"] = "C-V"  # p ペースト
+            # next/back
+            keymap_global["U1-o"] = "Alt-Left"  # History back
+            keymap_global["U1-i"] = "Alt-Right"  # History next
 
-        # vim undo redo
-        keymap_global["U1-u"] = "C-Z"  # undo
-        keymap_global["U1-r"] = "C-Y"  # redo
+            # esc with ime off
+            keymap_global["U1-Quote"] = escWithIMEOff
 
-        # ----------------spaceFn end
+            # like vim
+            keymap_global["U1-D"] = keymap.defineMultiStrokeKeymap("U1-D")
+            keymap_global["U1-D"][
+                "U1-D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
+            keymap_global["U1-D"]["U1-W"] = "C-S-Right", "C-X"  # dw 右単語切取
+            keymap_global["U1-D"]["U1-B"] = "C-S-Left", "C-X"  # db 左単語切取
+            keymap_global["U1-D"][
+                "U1-C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
+            keymap_global["U1-G"] = keymap.defineMultiStrokeKeymap("U1-G")
+            keymap_global["U1-G"]["U1-G"] = "C-Home"  # gg ファイル先頭へ移動
+            keymap_global["U1-G"]["U1-T"] = "C-Tab"  # gt タブ移動
+            keymap_global["U1-G"]["U1-C"] = "C-Slash"  # gc comment/uncomment
+            keymap_global["U1-Y"] = keymap.defineMultiStrokeKeymap("U1-Y")
+            keymap_global["U1-Y"]["U1-Semicolon"] = "C-C"  # y; コピー
+            keymap_global["U1-Y"][
+                "U1-Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
+            keymap_global["U1-Y"]["U1-W"] = "C-S-Right", "C-C"  # yc 右単語コピー
+            keymap_global["U1-Y"]["U1-B"] = "C-S-Left", "C-C"  # yb 左単語コピー
+            keymap_global["U1-Y"][
+                "U1-C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
+
+            keymap_global["U1-S-D"] = "S-End", "C-X"  # D カーソルから行末まで削除
+            keymap_global["U1-S-G"] = "C-End"  # G ファイル末尾へ移動
+            keymap_global["U1-p"] = "C-V"  # p ペースト
+            keymap_global["U1-u"] = "C-Z"  # undo
+            keymap_global["U1-r"] = "C-Y"  # redo
+
+            # pilot multistroke key map
+            keymap_global["U1-D"][
+                "D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
+            keymap_global["U1-D"]["W"] = "C-S-Right", "C-X"  # dw 右単語切取
+            keymap_global["U1-D"]["B"] = "C-S-Left", "C-X"  # db 左単語切取
+            keymap_global["U1-D"][
+                "C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
+            keymap_global["U1-G"]["G"] = "C-Home"  # gg ファイル先頭へ移動
+            keymap_global["U1-G"]["T"] = "C-Tab"  # gt タブ移動
+            keymap_global["U1-G"]["C"] = "C-Slash"  # gc comment/uncomment
+            keymap_global["U1-Y"]["Semicolon"] = "C-C"  # y; コピー
+            keymap_global["U1-Y"][
+                "Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
+            keymap_global["U1-Y"]["W"] = "C-S-Right", "C-C"  # yc 右単語コピー
+            keymap_global["U1-Y"]["B"] = "C-S-Left", "C-C"  # yb 左単語コピー
+            keymap_global["U1-Y"][
+                "C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
+
+        # -----------------------------------------------SpaceFn end
 
     # --------------------------------------------------------------------
 
+    # --------------------------------------------------------------------
+    # Default sample settings
+
+    keymap.replaceKey("RWin", 235)
+    keymap.defineModifier(235, "User0")
     # Global keymap which affects any windows
     if 1:
         keymap_global = keymap.defineWindowKeymap()
@@ -515,6 +543,9 @@ def configure(keymap):
 
         # Menu item list
         other_items = [
+            ("Reload config.py", keymap.command_ReloadConfig),
+            ("Edit config.py", keymap.command_EditConfig),
+            ("", None),
             ("Quote clipboard", quoteClipboardText),
             ("Indent clipboard", indentClipboardText),
             ("Unindent clipboard", unindentClipboardText),
@@ -523,9 +554,6 @@ def configure(keymap):
             ("To Full-Width", toFullWidthClipboardText),
             ("", None),
             ("Save clipboard to Desktop", command_SaveClipboardToDesktop),
-            ("", None),
-            ("Edit config.py", keymap.command_EditConfig),
-            ("Reload config.py", keymap.command_ReloadConfig),
         ]
 
         # Clipboard history list extensions
