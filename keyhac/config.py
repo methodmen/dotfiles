@@ -194,7 +194,7 @@ def configure(keymap):
     # --------------------------------------------------------------------
     # Default sample settings
 
-    keymap.replaceKey("RWin", 235)
+    keymap.replaceKey("RAlt", 235)
     keymap.defineModifier(235, "User0")
     # Global keymap which affects any windows
     if 1:
