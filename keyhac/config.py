@@ -105,8 +105,8 @@ def configure(keymap):
             keymap_global[k +
                           "U1-S-6"] = k + "Home"  # Move to beginning of line
             keymap_global[k + "U1-S-4"] = k + "End"  # Move to end of line
-            keymap_global[k + "U1-m"] = k + "PageUp"  # Page down
-            keymap_global[k + "U1-Period"] = k + "PageDown"  # page up
+            keymap_global[k + "U1-Period"] = k + "PageUp"  # Page up
+            keymap_global[k + "U1-m"] = k + "PageDown"  # Page down
             keymap_global[k + "U1-x"] = k + "Delete"  # Delete
             keymap_global[k + "U1-n"] = k + "Back"  # Back space
             keymap_global[k + "U1-Semicolon"] = k + "Enter"  # Enter
