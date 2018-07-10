@@ -478,8 +478,8 @@ def configure(keymap):
 
         # Date-time
         datetime_items = [
-            ("YYYY/MM/DD HH:MM:SS", dateAndTime("%Y/%m/%d %H:%M:%S")),
             ("YYYY/MM/DD", dateAndTime("%Y/%m/%d")),
+            ("YYYY/MM/DD HH:MM:SS", dateAndTime("%Y/%m/%d %H:%M:%S")),
             ("HH:MM:SS", dateAndTime("%H:%M:%S")),
             ("YYYYMMDD_HHMMSS", dateAndTime("%Y%m%d_%H%M%S")),
             ("YYYYMMDD", dateAndTime("%Y%m%d")),
@@ -582,7 +582,7 @@ def configure(keymap):
 
         # Clipboard history list extensions
         keymap.cblisters += [
-            ("Fixed phrase", cblister_FixedPhrase(fixed_items)),
             ("Date-time", cblister_FixedPhrase(datetime_items)),
+            ("Fixed phrase", cblister_FixedPhrase(fixed_items)),
             ("Others", cblister_FixedPhrase(other_items)),
         ]
