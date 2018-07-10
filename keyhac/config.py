@@ -96,18 +96,33 @@ def configure(keymap):
             keymap.replaceKey(193, "RShift")  # ろ to Right Shift
 
             # move and function keys
-            for k in ("", "S-", "C-", "C-S-", "A-", "A-S-", "A-C-", "A-C-S-",
-                      "W-", "W-S-", "W-C-", "W-C-S-", "W-A-", "W-A-S-",
-                      "W-A-C-", "W-A-C-S-", "RA-RC-", "RS-"):
+            for k in (
+                "",
+                "S-",
+                "C-",
+                "C-S-",
+                "A-",
+                "A-S-",
+                "A-C-",
+                "A-C-S-",
+                "W-",
+                "W-S-",
+                "W-C-",
+                "W-C-S-",
+                "W-A-",
+                "W-A-S-",
+                "W-A-C-",
+                "W-A-C-S-",
+                "RA-RC-",
+                "RS-",
+            ):
                 keymap_global[k + "U1-h"] = k + "Left"  # Move cursor left
                 keymap_global[k + "U1-j"] = k + "Down"  # Move cursor down
                 keymap_global[k + "U1-k"] = k + "Up"  # Move cursor up
                 keymap_global[k + "U1-l"] = k + "Right"  # Move cursor right
-                keymap_global[k +
-                              "U1-a"] = k + "Home"  # Move to beginning of line
+                keymap_global[k + "U1-a"] = k + "Home"  # Move to beginning of line
                 keymap_global[k + "U1-e"] = k + "End"  # Move to end of line
-                keymap_global[
-                    k + "U1-S-6"] = k + "Home"  # Move to beginning of line
+                keymap_global[k + "U1-S-6"] = k + "Home"  # Move to beginning of line
                 keymap_global[k + "U1-S-4"] = k + "End"  # Move to end of line
                 keymap_global[k + "U1-Comma"] = k + "PageUp"  # Page up
                 keymap_global[k + "U1-m"] = k + "PageDown"  # Page down
@@ -127,13 +142,10 @@ def configure(keymap):
 
             # move word
             keymap_global["U1-w"] = "C-Right"  # Move cursor word right
-            keymap_global[
-                "U1-S-w"] = "C-S-Right"  # Move and select cursor word right
+            keymap_global["U1-S-w"] = "C-S-Right"  # Move and select cursor word right
             keymap_global["U1-b"] = "C-Left"  # Move cursor word left
-            keymap_global[
-                "U1-S-b"] = "C-S-Left"  # Move and select cursor word left
-            keymap_global[
-                "U1-c"] = "C-Left", "C-S-Right"  # Select current word
+            keymap_global["U1-S-b"] = "C-S-Left"  # Move and select cursor word left
+            keymap_global["U1-c"] = "C-Left", "C-S-Right"  # Select current word
 
             # next/back
             keymap_global["U1-o"] = "Alt-Left"  # History back
@@ -144,24 +156,24 @@ def configure(keymap):
 
             # like vim
             keymap_global["U1-D"] = keymap.defineMultiStrokeKeymap("U1-D")
-            keymap_global["U1-D"][
-                "U1-D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
+            keymap_global["U1-D"]["U1-D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
             keymap_global["U1-D"]["U1-W"] = "C-S-Right", "C-X"  # dw 右単語切取
             keymap_global["U1-D"]["U1-B"] = "C-S-Left", "C-X"  # db 左単語切取
-            keymap_global["U1-D"][
-                "U1-C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
+            keymap_global["U1-D"]["U1-C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
             keymap_global["U1-G"] = keymap.defineMultiStrokeKeymap("U1-G")
             keymap_global["U1-G"]["U1-G"] = "C-Home"  # gg ファイル先頭へ移動
             keymap_global["U1-G"]["U1-T"] = "C-Tab"  # gt タブ移動
             keymap_global["U1-G"]["U1-C"] = "C-Slash"  # gc comment/uncomment
             keymap_global["U1-Y"] = keymap.defineMultiStrokeKeymap("U1-Y")
             keymap_global["U1-Y"]["U1-Semicolon"] = "C-C"  # y; コピー
-            keymap_global["U1-Y"][
-                "U1-Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
+            keymap_global["U1-Y"]["U1-Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
             keymap_global["U1-Y"]["U1-W"] = "C-S-Right", "C-C"  # yc 右単語コピー
             keymap_global["U1-Y"]["U1-B"] = "C-S-Left", "C-C"  # yb 左単語コピー
-            keymap_global["U1-Y"][
-                "U1-C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
+            keymap_global["U1-Y"]["U1-C"] = (
+                "C-Left",
+                "C-S-Right",
+                "C-C",
+            )  # yc カレントワードコピー
 
             keymap_global["U1-S-D"] = "S-End", "C-X"  # D カーソルから行末まで削除
             keymap_global["U1-S-G"] = "C-End"  # G ファイル末尾へ移動
@@ -170,22 +182,18 @@ def configure(keymap):
             keymap_global["U1-r"] = "C-Y"  # redo
 
             # pilot multistroke key map
-            keymap_global["U1-D"][
-                "D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
+            keymap_global["U1-D"]["D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
             keymap_global["U1-D"]["W"] = "C-S-Right", "C-X"  # dw 右単語切取
             keymap_global["U1-D"]["B"] = "C-S-Left", "C-X"  # db 左単語切取
-            keymap_global["U1-D"][
-                "C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
+            keymap_global["U1-D"]["C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
             keymap_global["U1-G"]["G"] = "C-Home"  # gg ファイル先頭へ移動
             keymap_global["U1-G"]["T"] = "C-Tab"  # gt タブ移動
             keymap_global["U1-G"]["C"] = "C-Slash"  # gc comment/uncomment
             keymap_global["U1-Y"]["Semicolon"] = "C-C"  # y; コピー
-            keymap_global["U1-Y"][
-                "Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
+            keymap_global["U1-Y"]["Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
             keymap_global["U1-Y"]["W"] = "C-S-Right", "C-C"  # yc 右単語コピー
             keymap_global["U1-Y"]["B"] = "C-S-Left", "C-C"  # yb 左単語コピー
-            keymap_global["U1-Y"][
-                "C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
+            keymap_global["U1-Y"]["C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
 
         # -----------------------------------------------SpaceFn end
 
@@ -220,11 +228,14 @@ def configure(keymap):
 
         # Clipboard history related
         keymap_global[
-            "C-S-Z"] = keymap.command_ClipboardList  # Open the clipboard history list
+            "C-S-Z"
+        ] = keymap.command_ClipboardList  # Open the clipboard history list
         keymap_global[
-            "C-S-X"] = keymap.command_ClipboardRotate  # Move the most recent history to tail
+            "C-S-X"
+        ] = keymap.command_ClipboardRotate  # Move the most recent history to tail
         keymap_global[
-            "C-S-A-X"] = keymap.command_ClipboardRemove  # Remove the most recent history
+            "C-S-A-X"
+        ] = keymap.command_ClipboardRemove  # Remove the most recent history
         keymap.quote_mark = "> "  # Mark for quote pasting
 
         # Keyboard macro
@@ -236,8 +247,7 @@ def configure(keymap):
 
     # USER0-F1 : Test of launching application
     if 1:
-        keymap_global["U0-F1"] = keymap.ShellExecuteCommand(
-            None, "notepad.exe", "", "")
+        keymap_global["U0-F1"] = keymap.ShellExecuteCommand(None, "notepad.exe", "", "")
 
     # USER0-F2 : Test of sub thread execution using JobQueue/JobItem
     if 1:
@@ -266,7 +276,8 @@ def configure(keymap):
     # USER0-F : Activation of specific window
     if 1:
         keymap_global["U0-F"] = keymap.ActivateWindowCommand(
-            "cfiler.exe", "CfilerWindowClass")
+            "cfiler.exe", "CfilerWindowClass"
+        )
 
     # USER0-E : Activate specific window or launch application if the window doesn't exist
     if 1:
@@ -279,8 +290,7 @@ def configure(keymap):
                 wnd = wnd.getLastActivePopup()
                 wnd.setForeground()
             else:
-                executeFunc = keymap.ShellExecuteCommand(
-                    None, "notepad.exe", "", "")
+                executeFunc = keymap.ShellExecuteCommand(None, "notepad.exe", "", "")
                 executeFunc()
 
         keymap_global["U0-E"] = command_ActivateOrExecuteNotepad
@@ -324,22 +334,32 @@ def configure(keymap):
             def popApplicationList():
 
                 applications = [
-                    ("Paint",
-                     keymap.ShellExecuteCommand(None, "mspaint.exe", "", "")),
-                    ("Notepad",
-                     keymap.ShellExecuteCommand(None, "notepad.exe", "", "")),
+                    ("Paint", keymap.ShellExecuteCommand(None, "mspaint.exe", "", "")),
+                    (
+                        "Notepad",
+                        keymap.ShellExecuteCommand(None, "notepad.exe", "", ""),
+                    ),
                 ]
 
                 websites = [
-                    ("Google",
-                     keymap.ShellExecuteCommand(
-                         None, "https://www.google.co.jp/", "", "")),
-                    ("Facebook",
-                     keymap.ShellExecuteCommand(
-                         None, "https://www.facebook.com/", "", "")),
-                    ("Twitter",
-                     keymap.ShellExecuteCommand(None, "https://twitter.com/",
-                                                "", "")),
+                    (
+                        "Google",
+                        keymap.ShellExecuteCommand(
+                            None, "https://www.google.co.jp/", "", ""
+                        ),
+                    ),
+                    (
+                        "Facebook",
+                        keymap.ShellExecuteCommand(
+                            None, "https://www.facebook.com/", "", ""
+                        ),
+                    ),
+                    (
+                        "Twitter",
+                        keymap.ShellExecuteCommand(
+                            None, "https://twitter.com/", "", ""
+                        ),
+                    ),
                 ]
 
                 listers = [
@@ -364,8 +384,8 @@ def configure(keymap):
         keymap_global["U0-A-Right"] = keymap.MouseMoveCommand(10, 0)
         keymap_global["U0-A-Up"] = keymap.MouseMoveCommand(0, -10)
         keymap_global["U0-A-Down"] = keymap.MouseMoveCommand(0, 10)
-        keymap_global["D-U0-A-Space"] = keymap.MouseButtonDownCommand('left')
-        keymap_global["U-U0-A-Space"] = keymap.MouseButtonUpCommand('left')
+        keymap_global["D-U0-A-Space"] = keymap.MouseButtonDownCommand("left")
+        keymap_global["U-U0-A-Space"] = keymap.MouseButtonUpCommand("left")
         keymap_global["U0-A-PageUp"] = keymap.MouseWheelCommand(1.0)
         keymap_global["U0-A-PageDown"] = keymap.MouseWheelCommand(-1.0)
         keymap_global["U0-A-Home"] = keymap.MouseHorizontalWheelCommand(-1.0)
@@ -402,7 +422,8 @@ def configure(keymap):
     # both these two keymaps are applied in mixed manner.
     if 0:
         keymap_notepad = keymap.defineWindowKeymap(
-            exe_name="notepad.exe", class_name="Edit")
+            exe_name="notepad.exe", class_name="Edit"
+        )
 
         # Define Ctrl-X as the first key of multi-stroke keys
         keymap_notepad["C-X"] = keymap.defineMultiStrokeKeymap("C-X")
@@ -492,11 +513,12 @@ def configure(keymap):
             s = ""
             for line in lines:
                 for i in range(4 + 1):
-                    if i >= len(line): break
-                    if line[i] == '\t':
+                    if i >= len(line):
+                        break
+                    if line[i] == "\t":
                         i += 1
                         break
-                    if line[i] != ' ':
+                    if line[i] != " ":
                         break
                 s += line[i:]
             return s
@@ -520,7 +542,8 @@ def configure(keymap):
         def command_SaveClipboardToDesktop():
 
             text = getClipboardText()
-            if not text: return
+            if not text:
+                return
 
             # Convert to utf-8 / CR-LF
             utf8_bom = b"\xEF\xBB\xBF"
@@ -532,7 +555,8 @@ def configure(keymap):
             # Save in Desktop directory
             fullpath = os.path.join(
                 getDesktopPath(),
-                datetime.datetime.now().strftime("clip_%Y%m%d_%H%M%S.txt"))
+                datetime.datetime.now().strftime("clip_%Y%m%d_%H%M%S.txt"),
+            )
             fd = open(fullpath, "wb")
             fd.write(utf8_bom)
             fd.write(text)
