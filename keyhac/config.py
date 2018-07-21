@@ -334,6 +334,8 @@ def configure(keymap):
             def popApplicationList():
 
                 applications = [
+                    # ("Downloads", keymap.ShellExecuteCommand("explore", "%USERPROFILE%\\Download", "", "")),
+                    ("VsAdmin", keymap.ShellExecuteCommand(None, "C:\\temp\\Visual Studio 2017_byAdmin.lnk", "", "")),
                     ("Paint", keymap.ShellExecuteCommand(None, "mspaint.exe", "", "")),
                     (
                         "Notepad",
