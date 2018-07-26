@@ -37,8 +37,8 @@ def configure(keymap):
     # --------------------------------------------------------------------
     # My keymap
     if 1:
-        enableChangeAltWin = True
-        enableChangeFirstStageKeys = True
+        enableChangeAltWin = False
+        enableChangeFirstStageKeys = False
         enableSpaceFN = True
 
         def imeOn():
@@ -195,6 +195,7 @@ def configure(keymap):
             keymap_global["U1-Y"]["B"] = "C-S-Left", "C-C"  # yb 左単語コピー
             keymap_global["U1-Y"]["C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
 
+            keymap_global["U1-f"] = "Ctrl-Space"
         # -----------------------------------------------SpaceFn end
 
     # --------------------------------------------------------------------
