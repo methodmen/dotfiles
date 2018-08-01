@@ -40,12 +40,16 @@ def configure(keymap):
         enableChangeAltWin = False
         enableChangeFirstStageKeys = False
         enableSpaceFN = True
+        enableAutoConvertByteSymbols = True
 
         def imeOn():
             keymap.wnd.setImeStatus(1)
 
         def imeOff():
             keymap.wnd.setImeStatus(0)
+
+        def swichIme(imeStatus):
+            keymap.wnd.setImeStatus(not imeStatus)
 
         def escWithIMEOff():
             esc = keymap.InputKeyCommand("Esc")
@@ -168,13 +172,13 @@ def configure(keymap):
             keymap_global["U1-Y"] = keymap.defineMultiStrokeKeymap("U1-Y")
             keymap_global["U1-Y"]["U1-Semicolon"] = "C-C"  # y; コピー
             keymap_global["U1-Y"]["U1-Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
-            keymap_global["U1-Y"]["U1-W"] = "C-S-Right", "C-C"  # yc 右単語コピー
+            keymap_global["U1-Y"]["U1-W"] = "C-S-Right", "C-C"  # yw 右単語コピー
             keymap_global["U1-Y"]["U1-B"] = "C-S-Left", "C-C"  # yb 左単語コピー
             keymap_global["U1-Y"]["U1-I"] = (
                 "C-Left",
                 "C-S-Right",
                 "C-C",
-            )  # yc カレントワードコピー
+            )  # yi カレントワードコピー
 
             keymap_global["U1-S-D"] = "S-End", "C-X"  # D カーソルから行末まで削除
             keymap_global["U1-S-G"] = "C-End"  # G ファイル末尾へ移動
@@ -183,25 +187,98 @@ def configure(keymap):
             keymap_global["U1-r"] = "C-Y"  # redo
 
             # pilot multistroke key map
-            keymap_global["U1-D"] = keymap.defineMultiStrokeKeymap("U1-D")
+            # keymap_global["U1-D"] = keymap.defineMultiStrokeKeymap("U1-D")
             keymap_global["U1-D"]["D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
             keymap_global["U1-D"]["W"] = "C-S-Right", "C-X"  # dw 右単語切取
             keymap_global["U1-D"]["B"] = "C-S-Left", "C-X"  # db 左単語切取
             keymap_global["U1-D"]["I"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
-            keymap_global["U1-G"] = keymap.defineMultiStrokeKeymap("U1-G")
+            # keymap_global["U1-G"] = keymap.defineMultiStrokeKeymap("U1-G")
             keymap_global["U1-G"]["G"] = "C-Home"  # gg ファイル先頭へ移動
             keymap_global["U1-G"]["T"] = "C-Tab"  # gt タブ移動
             keymap_global["U1-G"]["C"] = "C-Slash"  # gc comment/uncomment
-            keymap_global["U1-Y"] = keymap.defineMultiStrokeKeymap("U1-Y")
+            # keymap_global["U1-Y"] = keymap.defineMultiStrokeKeymap("U1-Y")
             keymap_global["U1-Y"]["Semicolon"] = "C-C"  # y; コピー
             keymap_global["U1-Y"]["Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
-            keymap_global["U1-Y"]["W"] = "C-S-Right", "C-C"  # yc 右単語コピー
+            keymap_global["U1-Y"]["W"] = "C-S-Right", "C-C"  # yw 右単語コピー
             keymap_global["U1-Y"]["B"] = "C-S-Left", "C-C"  # yb 左単語コピー
-            keymap_global["U1-Y"]["I"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
+            keymap_global["U1-Y"]["I"] = "C-Left", "C-S-Right", "C-C"  # yi カレントワードコピー
 
             # for auto complete
             keymap_global["U1-f"] = "Ctrl-Space"
         # -----------------------------------------------SpaceFn end
+
+        # --------------------------------------------------------------------
+        # auto convert byte symbols
+        # IME offして半角記号入力 日本語入力中によく使う半角記号を打ちやすく
+        if enableAutoConvertByteSymbols:
+
+            def is_exclude_exe_target(window):
+                if window.getProcessName() in ("hoge.exe"):
+                    return False
+                return True
+
+            def inputByteSymbol(inputText):
+                imeOff()
+                keymap.InputTextCommand(inputText)()
+
+            def inputByteSymbolAfterReopairIme(inputText):
+                imeStatus = keymap.getWindow().getImeStatus()
+                inputByteSymbol(inputText)
+                keymap.wnd.setImeStatus(imeStatus)
+
+            keymap_exclude_exe = keymap.defineWindowKeymap(
+                check_func=is_exclude_exe_target
+            )
+
+            def symbol_1byte_backquote():
+                inputByteSymbolAfterReopairIme("`")
+
+            keymap_exclude_exe["BackQuote"] = symbol_1byte_backquote
+
+            def symbol_1byte_exclamation():
+                inputByteSymbolAfterReopairIme("!")
+
+            keymap_exclude_exe["RS-1"] = symbol_1byte_exclamation
+
+            def symbol_1byte_at():
+                inputByteSymbolAfterReopairIme("@")
+
+            keymap_global["RS-2"] = symbol_1byte_at
+
+            def symbol_1byte_number():
+                inputByteSymbolAfterReopairIme("#")
+
+            keymap_global["RS-3"] = symbol_1byte_number
+
+            def symbol_1byte_asterisk():
+                inputByteSymbolAfterReopairIme("*")
+
+            keymap_exclude_exe["LS-8"] = symbol_1byte_asterisk
+
+            def symbol_1byte_left_parenthesis():
+                inputByteSymbolAfterReopairIme("(")
+
+            keymap_exclude_exe["LS-9"] = symbol_1byte_left_parenthesis
+
+            def symbol_1byte_right_parenthesis():
+                inputByteSymbolAfterReopairIme(")")
+
+            keymap_exclude_exe["LS-0"] = symbol_1byte_right_parenthesis
+
+            def symbol_1byte_underscore():
+                inputByteSymbolAfterReopairIme("_")
+
+            keymap_exclude_exe["LS-Minus"] = symbol_1byte_underscore
+
+            def symbol_1byte_greater_than():
+                inputByteSymbolAfterReopairIme(">")
+
+            keymap_exclude_exe["LS-Period"] = symbol_1byte_greater_than
+
+            def symbol_1byte_question_mark():
+                inputByteSymbolAfterReopairIme("?")
+
+            keymap_exclude_exe["LS-Slash"] = symbol_1byte_question_mark
 
     # --------------------------------------------------------------------
 
