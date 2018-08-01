@@ -27,7 +27,7 @@ def configure(keymap):
     # Customizing the display
 
     # Font
-    keymap.setFont("Fira Code, Meiryo", 13)
+    keymap.setFont("MS Gothic Regular", 16)
 
     # Theme
     keymap.setTheme("black")
@@ -37,8 +37,8 @@ def configure(keymap):
     # --------------------------------------------------------------------
     # My keymap
     if 1:
-        enableChangeAltWin = True
-        enableChangeFirstStageKeys = True
+        enableChangeAltWin = False
+        enableChangeFirstStageKeys = False
         enableSpaceFN = True
 
         def imeOn():
@@ -157,7 +157,7 @@ def configure(keymap):
             keymap_global["U1-D"]["U1-D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
             keymap_global["U1-D"]["U1-W"] = "C-S-Right", "C-X"  # dw 右単語切取
             keymap_global["U1-D"]["U1-B"] = "C-S-Left", "C-X"  # db 左単語切取
-            keymap_global["U1-D"]["U1-C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
+            keymap_global["U1-D"]["U1-I"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
             keymap_global["U1-G"] = keymap.defineMultiStrokeKeymap("U1-G")
             keymap_global["U1-G"]["U1-G"] = "C-Home"  # gg ファイル先頭へ移動
             keymap_global["U1-G"]["U1-T"] = "C-Tab"  # gt タブ移動
@@ -167,7 +167,7 @@ def configure(keymap):
             keymap_global["U1-Y"]["U1-Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
             keymap_global["U1-Y"]["U1-W"] = "C-S-Right", "C-C"  # yc 右単語コピー
             keymap_global["U1-Y"]["U1-B"] = "C-S-Left", "C-C"  # yb 左単語コピー
-            keymap_global["U1-Y"]["U1-C"] = (
+            keymap_global["U1-Y"]["U1-I"] = (
                 "C-Left",
                 "C-S-Right",
                 "C-C",
@@ -180,18 +180,21 @@ def configure(keymap):
             keymap_global["U1-r"] = "C-Y"  # redo
 
             # pilot multistroke key map
+            keymap_global["U1-D"] = keymap.defineMultiStrokeKeymap("U1-D")
             keymap_global["U1-D"]["D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
             keymap_global["U1-D"]["W"] = "C-S-Right", "C-X"  # dw 右単語切取
             keymap_global["U1-D"]["B"] = "C-S-Left", "C-X"  # db 左単語切取
-            keymap_global["U1-D"]["C"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
+            keymap_global["U1-D"]["I"] = "C-Left", "C-S-Right", "C-X"  # dc カレントワード切取
+            keymap_global["U1-G"] = keymap.defineMultiStrokeKeymap("U1-G")
             keymap_global["U1-G"]["G"] = "C-Home"  # gg ファイル先頭へ移動
             keymap_global["U1-G"]["T"] = "C-Tab"  # gt タブ移動
             keymap_global["U1-G"]["C"] = "C-Slash"  # gc comment/uncomment
+            keymap_global["U1-Y"] = keymap.defineMultiStrokeKeymap("U1-Y")
             keymap_global["U1-Y"]["Semicolon"] = "C-C"  # y; コピー
             keymap_global["U1-Y"]["Y"] = "Home", "S-End", "C-C", "Home"  # yy 1行コピー
             keymap_global["U1-Y"]["W"] = "C-S-Right", "C-C"  # yc 右単語コピー
             keymap_global["U1-Y"]["B"] = "C-S-Left", "C-C"  # yb 左単語コピー
-            keymap_global["U1-Y"]["C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
+            keymap_global["U1-Y"]["I"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
 
             # for auto complete
             keymap_global["U1-f"] = "Ctrl-Space"
@@ -335,7 +338,12 @@ def configure(keymap):
 
                 applications = [
                     # ("Downloads", keymap.ShellExecuteCommand("explore", "%USERPROFILE%\\Download", "", "")),
-                    ("VsAdmin", keymap.ShellExecuteCommand(None, "C:\\temp\\Visual Studio 2017_byAdmin.lnk", "", "")),
+                    (
+                        "VsAdmin",
+                        keymap.ShellExecuteCommand(
+                            None, "C:\\temp\\Visual Studio 2017_byAdmin.lnk", "", ""
+                        ),
+                    ),
                     ("Paint", keymap.ShellExecuteCommand(None, "mspaint.exe", "", "")),
                     (
                         "Notepad",
