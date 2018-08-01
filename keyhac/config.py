@@ -37,8 +37,8 @@ def configure(keymap):
     # --------------------------------------------------------------------
     # My keymap
     if 1:
-        enableChangeAltWin = False
-        enableChangeFirstStageKeys = False
+        enableChangeAltWin = True
+        enableChangeFirstStageKeys = True
         enableSpaceFN = True
 
         def imeOn():
@@ -122,10 +122,8 @@ def configure(keymap):
                 keymap_global[k + "U1-l"] = k + "Right"  # Move cursor right
                 keymap_global[k + "U1-a"] = k + "Home"  # Move to beginning of line
                 keymap_global[k + "U1-e"] = k + "End"  # Move to end of line
-                keymap_global[k + "U1-S-6"] = k + "Home"  # Move to beginning of line
-                keymap_global[k + "U1-S-4"] = k + "End"  # Move to end of line
                 keymap_global[k + "U1-Comma"] = k + "PageUp"  # Page up
-                keymap_global[k + "U1-m"] = k + "PageDown"  # Page down
+                keymap_global[k + "U1-Period"] = k + "PageDown"  # Page down
                 keymap_global[k + "U1-x"] = k + "Delete"  # Delete
                 keymap_global[k + "U1-n"] = k + "Back"  # Back space
                 keymap_global[k + "U1-Semicolon"] = k + "Enter"  # Enter
@@ -195,6 +193,7 @@ def configure(keymap):
             keymap_global["U1-Y"]["B"] = "C-S-Left", "C-C"  # yb 左単語コピー
             keymap_global["U1-Y"]["C"] = "C-Left", "C-S-Right", "C-C"  # yc カレントワードコピー
 
+            # for auto complete
             keymap_global["U1-f"] = "Ctrl-Space"
         # -----------------------------------------------SpaceFn end
 
