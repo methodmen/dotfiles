@@ -37,8 +37,8 @@ def configure(keymap):
     # --------------------------------------------------------------------
     # My keymap
     if 1:
-        enableChangeAltWin = False
-        enableChangeFirstStageKeys = False
+        enableChangeAltWin = True
+        enableChangeFirstStageKeys = True
         enableSpaceFN = True
         enableAutoConvertByteSymbols = True
 
@@ -235,10 +235,10 @@ def configure(keymap):
 
             keymap_exclude_exe["BackQuote"] = symbol_1byte_backquote
 
-            def symbol_1byte_exclamation():
-                inputByteSymbolAfterReopairIme("!")
+            # def symbol_1byte_exclamation():
+            #     inputByteSymbolAfterReopairIme("!")
 
-            keymap_exclude_exe["RS-1"] = symbol_1byte_exclamation
+            # keymap_exclude_exe["RS-1"] = symbol_1byte_exclamation
 
             def symbol_1byte_at():
                 inputByteSymbolAfterReopairIme("@")
@@ -275,10 +275,10 @@ def configure(keymap):
 
             keymap_exclude_exe["LS-Period"] = symbol_1byte_greater_than
 
-            def symbol_1byte_question_mark():
-                inputByteSymbolAfterReopairIme("?")
+            # def symbol_1byte_question_mark():
+            #     inputByteSymbolAfterReopairIme("?")
 
-            keymap_exclude_exe["LS-Slash"] = symbol_1byte_question_mark
+            # keymap_exclude_exe["LS-Slash"] = symbol_1byte_question_mark
 
     # --------------------------------------------------------------------
 
