@@ -37,31 +37,31 @@ def configure(keymap):
     # --------------------------------------------------------------------
     # My keymap
     if 1:
-        enableChangeAltWin = True
+        enableChangeAltWin = False
         enableChangeFirstStageKeys = False
         enableSpaceFN = True
         enableAutoConvertByteSymbols = True
 
-        def imeOn():
+        def ime_on():
             keymap.wnd.setImeStatus(1)
 
-        def imeOff():
+        def ime_off():
             keymap.wnd.setImeStatus(0)
 
-        def swichIme(imeStatus):
+        def swich_ime(imeStatus):
             keymap.wnd.setImeStatus(not imeStatus)
 
-        def escWithIMEOff():
+        def esc_with_ime_off():
             esc = keymap.InputKeyCommand("Esc")
             esc()
-            imeOff()  # For vim
+            ime_off()  # For vim
 
         # Get global keymap instance
         keymap_global = keymap.defineWindowKeymap()
 
         # One shot modifire
-        keymap_global["O-LShift"] = imeOff
-        keymap_global["O-RShift"] = imeOn
+        keymap_global["O-LShift"] = ime_off
+        keymap_global["O-RShift"] = ime_on
 
         # close current window
         keymap_global["W-q"] = "A-F4"
@@ -154,7 +154,7 @@ def configure(keymap):
             keymap_global["U1-i"] = "Alt-Right"  # History next
 
             # esc with ime off
-            keymap_global["U1-Quote"] = escWithIMEOff
+            keymap_global["U1-Quote"] = esc_with_ime_off
 
             # close current window
             keymap_global["U1-Q"] = "A-F4"
@@ -218,7 +218,7 @@ def configure(keymap):
                 return True
 
             def inputByteSymbol(inputText):
-                imeOff()
+                ime_off()
                 keymap.InputTextCommand(inputText)()
 
             def inputByteSymbolAfterReopairIme(inputText):
