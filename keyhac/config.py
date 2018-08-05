@@ -38,7 +38,7 @@ def configure(keymap):
     # My keymap
     if 1:
         enableChangeAltWin = True
-        enableChangeFirstStageKeys = True
+        enableChangeFirstStageKeys = False
         enableSpaceFN = True
         enableAutoConvertByteSymbols = True
 
