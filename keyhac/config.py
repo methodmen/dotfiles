@@ -132,6 +132,7 @@ def configure(keymap):
                 keymap_global[k + "U1-n"] = k + "Back"  # Back space
                 keymap_global[k + "U1-Semicolon"] = k + "Enter"  # Enter
                 keymap_global[k + "U1-t"] = k + "LW-Up"  # Maximize Window
+                keymap_global[k + "U1-CloseBracket"] = k + "F12"  # Jump environment code
 
                 for i in range(13):  # set F1~F12
                     if i == 0:
