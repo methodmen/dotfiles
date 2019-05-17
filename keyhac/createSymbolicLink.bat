@@ -1,2 +1,3 @@
 rem need admin permission
-mklink "C:\Program Files\keyhac\config.py" "C:\Github\dotfiles\keyhac\config.py"
+REM mklink "C:\Program Files\keyhac\config.py" "C:\Github\dotfiles\keyhac\config.py"
+mklink "C:\Program Files (ext)\keyhac\config.py" "C:\Github\dotfiles\keyhac\config.py"
