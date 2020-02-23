@@ -129,7 +129,7 @@ def configure(keymap):
                 keymap_global[k + "U1-Comma"] = k + "PageUp"  # Page up
                 keymap_global[k + "U1-Period"] = k + "PageDown"  # Page down
                 keymap_global[k + "U1-x"] = k + "Delete"  # Delete
-                keymap_global[k + "U1-n"] = k + "Back"  # Back space
+                keymap_global[k + "U1-p"] = k + "Back"  # Back space
                 keymap_global[k + "U1-Semicolon"] = k + "Enter"  # Enter
                 keymap_global[k + "U1-t"] = k + "LW-Up"  # Maximize Window
                 keymap_global[k + "U1-CloseBracket"] = k + "F12"  # Jump environment code
@@ -184,7 +184,6 @@ def configure(keymap):
 
             keymap_global["U1-S-D"] = "S-End", "C-X"  # D カーソルから行末まで削除
             keymap_global["U1-S-G"] = "C-End"  # G ファイル末尾へ移動
-            keymap_global["U1-p"] = "C-V"  # p ペースト
             keymap_global["U1-u"] = "C-Z"  # undo
             keymap_global["U1-r"] = "C-Y"  # redo
 
