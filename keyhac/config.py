@@ -156,7 +156,7 @@ def configure(keymap):
             keymap_global["U1-i"] = "Alt-Right"  # History next
 
             # esc with ime off
-            keymap_global["U1-Quote"] = esc_with_ime_off
+            keymap_global["U1-q"] = esc_with_ime_off
 
             # close current window
             keymap_global["U1-Q"] = "A-F4"
