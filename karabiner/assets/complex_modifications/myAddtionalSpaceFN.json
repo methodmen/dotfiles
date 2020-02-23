@@ -367,7 +367,7 @@
             }
           ],
           "from": {
-            "key_code": "quote",
+            "key_code": "q",
             "modifiers": {
               "optional": [
                 "any"
