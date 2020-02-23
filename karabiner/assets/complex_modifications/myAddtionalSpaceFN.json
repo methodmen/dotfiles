@@ -243,7 +243,7 @@
             }
           ],
           "from": {
-            "key_code": "m",
+            "key_code": "period",
             "modifiers": {
               "optional": [
                 "any"
@@ -405,6 +405,58 @@
               ]
             }
           ],
+          "type": "basic"
+        },
+        {
+          "conditions": [
+            {
+              "name": "spacefn_mode",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "m",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+              {
+                "key_code": "right_arrow",
+                "modifiers": [
+                  "control"
+                ]
+              }
+            ],
+          "type": "basic"
+        },
+      {
+          "conditions": [
+            {
+              "name": "spacefn_mode",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "n",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+              {
+                "key_code": "left_arrow",
+                "modifiers": [
+                  "control"
+                ]
+              }
+            ],
           "type": "basic"
         },
         {
