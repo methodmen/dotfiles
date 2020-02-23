@@ -141,7 +141,7 @@
             }
           ],
           "from": {
-            "key_code": "n",
+            "key_code": "p",
             "modifiers": {
               "optional": [
                 "any"
@@ -377,32 +377,6 @@
           "to": [
             {
               "key_code": "escape"
-            }
-          ],
-          "type": "basic"
-        },
-        {
-          "conditions": [
-            {
-              "name": "spacefn_mode",
-              "type": "variable_if",
-              "value": 1
-            }
-          ],
-          "from": {
-            "key_code": "p",
-            "modifiers": {
-              "optional": [
-                "any"
-              ]
-            }
-          },
-          "to": [
-            {
-              "key_code": "v",
-              "modifiers": [
-                "left_command"
-              ]
             }
           ],
           "type": "basic"
