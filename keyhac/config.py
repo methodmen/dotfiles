@@ -151,6 +151,10 @@ def configure(keymap):
             keymap_global["U1-S-b"] = "C-S-Left"  # Move and select cursor word left
             keymap_global["U1-c"] = "C-Left", "C-S-Right"  # Select current word
 
+            # virtual desktop
+            keymap_global["U1-n"] = "W-C-Left"  # Move virtual desktop left
+            keymap_global["U1-m"] = "W-C-Right"  # Move virtual desktop right
+
             # next/back
             keymap_global["U1-o"] = "Alt-Left"  # History back
             keymap_global["U1-i"] = "Alt-Right"  # History next
