@@ -158,9 +158,6 @@ def configure(keymap):
             # esc with ime off
             keymap_global["U1-q"] = esc_with_ime_off
 
-            # close current window
-            keymap_global["U1-Q"] = "A-F4"
-
             # like vim
             keymap_global["U1-D"] = keymap.defineMultiStrokeKeymap("U1-D")
             keymap_global["U1-D"]["U1-D"] = "Home", "S-End", "C-X", "Back"  # dd 1行削除
